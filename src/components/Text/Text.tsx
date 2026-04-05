@@ -1,25 +1,29 @@
-import style from "./Text.module.css";
+import React from 'react';
+import style from './Text.module.css';
 
 interface TextProps {
-  children: React.ReactNode;
-  textAlign?: string;
+  children?: React.ReactNode;
+  textAlign?: 'left' | 'center' | 'right';
   marginBottom?: string;
+  className?: string;
+  isError?: boolean;
 }
 
-export default function Text({
+const Text: React.FC<TextProps> = ({
   children,
-  textAlign = "",
-  marginBottom = "0",
-}: TextProps) {
+  textAlign = 'left',
+  marginBottom = '0',
+  className = '',
+  isError = false,
+}) => {
   return (
     <p
-      className={[
-        style["text"],
-        style[textAlign],
-        style[`marginBottom${marginBottom}`],
-      ].join(" ")}
+      style={{ textAlign, marginBottom }}
+      className={`${style.text} ${isError ? style.error : ''} ${className}`}
     >
       {children}
     </p>
   );
-}
+};
+
+export default Text;

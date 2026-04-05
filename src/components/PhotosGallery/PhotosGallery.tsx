@@ -1,5 +1,23 @@
-import Grid from "../Grid/Grid";
+import type { Photo } from '../../types/photo';
+import Grid from '../Grid/Grid';
+import PhotosGalleryItem from '../PhotosGalleryItem/PhotosGalleryItem';
 
-export default function PhotosGallery() {
-  return <Grid>{/* PhotosGalleryItems */}</Grid>;
+interface PhotosCalleryProps {
+  photos: Photo[];
+  onSelect: (photo: Photo) => void;
+}
+
+export default function PhotosGallery({
+  photos,
+  onSelect,
+}: PhotosCalleryProps) {
+  return (
+    <>
+      <Grid>
+        {photos.map((photo) => (
+          <PhotosGalleryItem key={photo.id} photo={photo} onSelect={onSelect} />
+        ))}
+      </Grid>
+    </>
+  );
 }
